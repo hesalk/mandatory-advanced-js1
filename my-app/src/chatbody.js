@@ -10,23 +10,18 @@ class ChatBody extends Component {
         this.listen = this.listen.bind(this);
     }
     listen(){
-        let test = "test";
+        console.log(this)
         let _this = this;
         var promise1 = new Promise(function(resolve, reject) {
             socket.on("new_message", function (message) {
                 resolve(message)
-                console.log(message);
-                console.log(test);
-                test = message
             });
           });
           promise1.then(function(value){
-            console.log(_this.state.message);
-            console.log(value.content);
-            
-            _this.setState({message: value.content})
-            
-            console.log(_this.state)
+            const currentmessage = _this.state.message;
+            console.log(currentmessage);
+            currentmessage.push((<div>{value.message}</div>))
+            console.log(currentmessage)
             })
     }
     render(){
