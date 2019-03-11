@@ -1,6 +1,7 @@
+import io from 'socket.io-client';
+
 import React, { Component } from 'react';
-var io = require("socket.io-client");
-var socket = io('http://ec2-13-53-66-202.eu-north-1.compute.amazonaws.com:3000/');
+
 
 
 class ChatBody extends Component {
@@ -9,26 +10,29 @@ class ChatBody extends Component {
         this.state = {message :[]}
         this.listen = this.listen.bind(this);
     }
+
+    componentDidMount() {
+        this.socket = io('http://ec2-13-53-66-202.eu-north-1.compute.amazonaws.com:3000/');
+
+        this.socket.on("messages", (messages) => {
+            this.setState({ message: messages});
+        });
+
+        this.socket.on("new_message", (message) => {
+            this.setState({ message: [...this.state.message, message]});
+        });
+    }
+
     listen(){
         console.log(this)
-        let _this = this;
-        var promise1 = new Promise(function(resolve, reject) {
-            socket.on("new_message", function (message) {
-                resolve(message)
-            });
-          });
-          promise1.then(function(value){
-            const currentmessage = _this.state.message;
-            console.log(currentmessage);
-            currentmessage.push((<div>{value.message}</div>))
-            console.log(currentmessage)
-            })
     }
     render(){
-        this.listen();
+        console.log(this.state.message);
         return(
             <div className="main">
-                <p>{this.state.message}</p>
+                <ul>
+                    {this.state.message.map(x => <li><strong>{x.username}</strong> {x.content}</li>)}
+                </ul>
             </div>
         )
     }
