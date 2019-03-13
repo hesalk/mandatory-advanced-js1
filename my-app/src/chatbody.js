@@ -1,5 +1,5 @@
 import io from 'socket.io-client';
-
+import Emojify from 'react-emojione';
 import React, { Component } from 'react';
 
 
@@ -30,9 +30,13 @@ class ChatBody extends Component {
         console.log(this.state.message);
         return(
             <div className="main">
+                <Emojify>
+                <div>:wink:</div>
+                
                 <ul>
                     {this.state.message.map(x => <li><strong>{x.username}</strong> {x.content}</li>)}
                 </ul>
+                </Emojify>
             </div>
         )
     }

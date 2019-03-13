@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import write from './write';
-import listen from './listen'
 
 
 class Input extends Component{
@@ -20,7 +19,6 @@ class Input extends Component{
     onClick(){
         console.log(this);
         write("hesham",this.state.message);
-        listen();
     }
     render(){
         return(
