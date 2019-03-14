@@ -1,30 +1,31 @@
 import React, { Component } from 'react';
 import write from './write';
+import Emojify from 'react-emojione';
 
 
 class Input extends Component{
     constructor(props) {
         super(props);
         this.state = {message :"test"}
-        this.onClick = this.onClick.bind(this);
         this.onChange = this.onChange.bind(this);
-        this.getstate = this.getstate.bind(this);
+        this.click = this.click.bind(this);
     }
     onChange(e){
         this.setState({message:e.target.value});
+        console.log(this.props.user)
     }
-    getstate(){
-        return(this.state)
-    }
-    onClick(){
-        console.log(this);
-        write("hesham",this.state.message);
-    }
+
+    click(){
+        console.log(this.props);
+        write(this.props.user,this.state.message);
+      }
     render(){
         return(
             <div className="main--input">
-                <input className="main--input--text" type="text" onChange={this.onChange}></input>
-                <button onClick={this.onClick}>Send</button>
+                <Emojify>
+                <input user={this.props.user} className="main--input--text" type="text" onChange={this.onChange}></input>
+                </Emojify>
+                <button onClick={this.click}>Send</button>
             </div>
         )
     }

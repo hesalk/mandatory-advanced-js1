@@ -34,7 +34,7 @@ class ChatBody extends Component {
                 <div>:wink:</div>
                 
                 <ul>
-                    {this.state.message.map(x => <li><strong>{x.username}</strong> {x.content}</li>)}
+                    {this.state.message.map(x => <li className="chatt--li"><strong>{x.username}</strong> {x.content}</li>)}
                 </ul>
                 </Emojify>
             </div>
