@@ -1,7 +1,7 @@
 import io from 'socket.io-client';
 import Emojify from 'react-emojione';
 import React, { Component } from 'react';
-
+import Linkify from 'linkifyjs/react';
 
 
 class ChatBody extends Component {
@@ -21,6 +21,7 @@ class ChatBody extends Component {
         this.socket.on("new_message", (message) => {
             this.setState({ message: [...this.state.message, message]});
         });
+        
     }
 
     listen(){
@@ -30,13 +31,14 @@ class ChatBody extends Component {
         console.log(this.state.message);
         return(
             <div className="main">
+                <Linkify>
                 <Emojify>
                 <div>:wink:</div>
-                
                 <ul>
-                    {this.state.message.map(x => <li className="chatt--li"><strong>{x.username}</strong> {x.content}</li>)}
+                    {this.state.message.map(x => <ol className="chatt--li"><strong>{x.username}</strong> {x.content}</ol>)}
                 </ul>
                 </Emojify>
+                </Linkify>
             </div>
         )
     }
