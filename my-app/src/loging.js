@@ -25,9 +25,17 @@ class LogIn extends Component{
     onclick(e){
         let code = e.keyCode || e.which;
         if(code === 13 || e.button === 0){
+        let reg = /^(?=.{1,12}$)(?![_.])(?!.*[_.]{2})[a-zA-Z0-9._]+(?<![_.])$/;
+        if(reg.test(this.state.btn)){
+          console.log("ok");
+          this.setState({reg:"ok"});
+          console.log(this.state)
+          }else{alert("Pleas enter valid usernam")
+          return
+        }
         console.log("btn is clicked");
         console.log(this.props);
-        this.setState({main:<><ChatBody></ChatBody><Input user={this.state.user}></Input></>})
+        this.setState({main:<><ChatBody></ChatBody><Input user={this.state.user}></Input></>});
         setTimeout(function () { 
             window.scrollBy({
                 top: 10000,
@@ -40,19 +48,15 @@ class LogIn extends Component{
         
       }
     onchange(e){
+        this.setState({btn:e.target.value})
+        console.log(this.state.btn)
         console.log(e.target.value)
         let reg = /^(?=.{1,12}$)(?![_.])(?!.*[_.]{2})[a-zA-Z0-9._]+(?<![_.])$/;
         let myInput = e.target.value;
         console.log(reg.test(myInput))
-        if(reg.test(myInput)){
-          console.log("ok");
-          this.setState({reg:"ok"});
-          console.log(this.state)
-          }else{console.log("fel")
-        }
         this.setState({user:e.target.value} )
       }
-      returnstate(){
+    returnstate(){
         this.setState({main:this.logstate.main})
       }
     render(){
