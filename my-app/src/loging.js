@@ -30,7 +30,7 @@ class LogIn extends Component{
         this.setState({main:<><ChatBody></ChatBody><Input user={this.state.user}></Input></>})
         setTimeout(function () { 
             window.scrollBy({
-                top: 400,
+                top: 10000,
                 left: 0,
                 behavior: 'smooth'
             });
@@ -58,6 +58,10 @@ class LogIn extends Component{
     render(){
         return(
             <>
+            <div>Extra features:
+                press enter to send//
+                auto focus on input
+            </div>
             <button onClick={this.returnstate}>return</button>
             {this.state.main}
             </>
